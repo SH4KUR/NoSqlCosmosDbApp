@@ -16,12 +16,8 @@ public class IdentityDbContext(DbContextOptions<IdentityDbContext> options) : Db
         modelBuilder.Entity<User>()
             .HasNoDiscriminator()
             .ToContainer("Users")
-            .HasPartitionKey(x => x.Email)
+            .HasPartitionKey(x => x.Id)
             .HasKey(x => x.Id);
-        modelBuilder.Entity<User>()
-            .OwnsMany(u => u.UserGroups);
-        modelBuilder.Entity<User>()
-            .OwnsOne(u => u.WorkPlace);
 
         modelBuilder.Entity<Group>()
             .HasNoDiscriminator()
